@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Diseño Login</string>
+    <string name="title_activity_maps">Map</string>
+    <string-array name="defaultValue">
+        <item>Seleccionar</item>
+        <item>Intercambio</item>
+        <item>Vaceo</item>
+    </string-array>
+</resources>

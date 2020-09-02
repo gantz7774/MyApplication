@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "680919543217",
+    "firebase_url": "https://proyecto-prueba-7a9b4.firebaseio.com",
+    "project_id": "proyecto-prueba-7a9b4",
+    "storage_bucket": "proyecto-prueba-7a9b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680919543217:android:8f525fd54a923ae22d2190",
+        "android_client_info": {
+          "package_name": "gantzcompany.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680919543217-9ueh9cbucc5o68rb60o24k4pvl79mhlp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "gantzcompany.myapplication",
+            "certificate_hash": "2a7f94ce578b67d3940dd0b59a50c973838b1280"
+          }
+        },
+        {
+          "client_id": "680919543217-gpdtvsiigedcbgeq1vn1giuhc8uad9vg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOaIxcbCiBSMSZ9tnxLP0woxMowORxiSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680919543217-gpdtvsiigedcbgeq1vn1giuhc8uad9vg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
