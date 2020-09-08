@@ -28,9 +28,9 @@
             android:label="@string/title_activity_maps"></activity>
 
         <activity android:name=".PerfilRepartidor" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".PerfilAdmin" />
         <activity android:name=".PruebaActivity" />
-        <activity android:name=".PerfilAdmin">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

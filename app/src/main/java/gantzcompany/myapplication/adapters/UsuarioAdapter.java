@@ -37,6 +37,9 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
         Usuarios usuarios = usuariosList.get(index);
 
         holder.textViewUsuario.setText(usuarios.getNombre());
+        holder.textViewCorreo.setText(usuarios.getCorreo());
+
+
     }
 
     @Override
@@ -47,6 +50,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
     public class  ViewHolder extends  RecyclerView.ViewHolder{
 
         private TextView textViewUsuario;
+        private TextView textViewCorreo;
         public View view;
 
         public ViewHolder(View view){
@@ -54,6 +58,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
 
             this.view = view;
             this.textViewUsuario = (TextView) view.findViewById(R.id.textviewUsuarios);
+            this.textViewCorreo = (TextView) view.findViewById(R.id.textviewCorreo);
         }
     }
 }

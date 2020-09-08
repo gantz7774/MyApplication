@@ -44,7 +44,7 @@
 
 
     <EditText
-        android:id="@+id/editTextNumber2"
+        android:id="@+id/editTextCantidad"
         android:layout_width="69dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -55,7 +55,7 @@
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/editTextNumber3"
+        android:id="@+id/editTextPrecio"
         android:layout_width="72dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -66,7 +66,7 @@
         android:inputType="number" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerDescripcion"
         android:layout_width="317dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
