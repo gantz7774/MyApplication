@@ -6,6 +6,16 @@ public class Pedidos {
     private String Precio;
     private String Descripcion;
 
+    public Boolean getEntregado() {
+        return Entregado;
+    }
+
+    public void setEntregado(Boolean entregado) {
+        Entregado = entregado;
+    }
+
+    private Boolean Entregado;
+
     public Pedidos(){}
 
     public Pedidos(String Nombre, String Cantidad, String Precio, String Descripcion ){
@@ -44,4 +54,6 @@ public class Pedidos {
     public void setDescripcion(String descripcion) {
         Descripcion = descripcion;
     }
+
+
 }

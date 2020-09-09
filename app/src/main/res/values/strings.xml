@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Diseño Login</string>
+    <string name="app_name">Agua Poseidon</string>
     <string name="title_activity_maps">Map</string>
     <string-array name="defaultValue">
         <item>Seleccionar</item>

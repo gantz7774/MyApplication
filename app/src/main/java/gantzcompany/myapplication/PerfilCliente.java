@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +17,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,9 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProfileActivity extends AppCompatActivity {
+public class PerfilCliente extends AppCompatActivity {
 
-    private Button mbtnCerrarSesion;
     private Button mbtnGenerarPedido;
     private TextView mtextviewNombre;
 
@@ -44,12 +45,11 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_perfil_cliente);
 
         mAuth = FirebaseAuth.getInstance();
         mDataBase = FirebaseDatabase.getInstance().getReference();
 
-        mbtnCerrarSesion = (Button) findViewById(R.id.btn_cerrar_sesion);
         mbtnGenerarPedido = (Button) findViewById(R.id.btn_generar_pedido);
         etcantidad = (EditText) findViewById(R.id.editTextCantidad);
         etprecio = (EditText) findViewById(R.id.editTextPrecio);
@@ -57,15 +57,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         mtextviewNombre = (TextView) findViewById(R.id.tvNombre);
 
-        mbtnCerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                mAuth.signOut();
-                startActivity(new Intent(ProfileActivity.this, MainActivity.class));
-                finish();
-            }
-        });
         obtenerDatoUsuario();
 
         mbtnGenerarPedido.setOnClickListener(new View.OnClickListener() {
@@ -74,14 +65,14 @@ public class ProfileActivity extends AppCompatActivity {
                 cantidad = etcantidad.getText().toString();
                 precio = etprecio.getText().toString();
                 nombre = mtextviewNombre.getText().toString();
-                /*descripcion = spdescripcion.getOnItemSelectedListener().toString();
-                */
+                descripcion = spdescripcion.getSelectedItem().toString();
+
                 if(!cantidad.isEmpty()) {
 
                     registrarPedido();
 
                 }else{
-                    Toast.makeText(ProfileActivity.this,"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PerfilCliente.this,"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
                 }
 
                 /*startActivity(new Intent(ProfileActivity.this, MapsActivity.class));*/
@@ -93,26 +84,30 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void registrarPedido() {
 
+        String id = mAuth.getCurrentUser().getUid();
                     Map<String, Object> map = new HashMap<>();
+                    FirebaseDatabase fb = FirebaseDatabase.getInstance();
                     map.put( "nombre", nombre);
                     map.put( "cantidad", cantidad+" unidades");
                     map.put( "precio", precio+" soles");
-                    map.put( "descripcion", "llenado");
+                    map.put( "descripcion", descripcion);
+                    map.put( "entregado", false);
+                    map.put( "enviando", false);
+                    map.put( "id", id);
+                    map.put( "id_repartidor", "");
 
 
-                    String id = mAuth.getCurrentUser().getUid();
-
-                    mDataBase.child("Pedidos").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    mDataBase.child("Pedidos").child(fb.getReference("quiz").push().getKey()).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
 
                             if(task2.isSuccessful()) {
-                                Toast.makeText(ProfileActivity.this, "Pedido Generado", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(ProfileActivity.this, MapsActivity.class));
+                                Toast.makeText(PerfilCliente.this, "Pedido Generado", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(PerfilCliente.this, MapsActivity.class));
                                 finish();
 
                             }else{
-                                Toast.makeText(ProfileActivity.this, "No se pudieron crear los datos correctamente", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PerfilCliente.this, "No se pudieron crear los datos correctamente", Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -142,5 +137,27 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuitem){
+
+        int id = menuitem.getItemId();
+        switch (id){
+            case R.id.btnCerrarSesion:
+                    mAuth.signOut();
+                    startActivity(new Intent(PerfilCliente.this, MainActivity.class));
+                    finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(menuitem);
     }
 }

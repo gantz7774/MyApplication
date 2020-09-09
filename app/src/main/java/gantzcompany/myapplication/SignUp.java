@@ -41,7 +41,7 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
+        getSupportActionBar().hide();
         nAuth = FirebaseAuth.getInstance();
         nDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -99,7 +99,7 @@ public class SignUp extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task2) {
 
                             if(task2.isSuccessful()) {
-                                startActivity(new Intent(SignUp.this,ProfileActivity.class));
+                                startActivity(new Intent(new SignUp(), PerfilCliente.class));
                                 finish();
 
                             }else{

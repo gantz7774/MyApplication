@@ -9,8 +9,10 @@ import gantzcompany.myapplication.adapters.PedidoAdapter;
 import gantzcompany.myapplication.models.Pedidos;
 
 
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -104,5 +106,26 @@ public class PerfilRepartidor extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_pedidos_pendientes, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuitem){
+
+        int id = menuitem.getItemId();
+        switch (id){
+            case R.id.btn_ver_pedidosPendientes:
+                startActivity(new Intent(this, PedidosPendiente.class));
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(menuitem);
     }
 }

@@ -77,7 +77,7 @@ public class Login extends AppCompatActivity {
                                 String tipo = dataSnapshot.child("tipo").getValue().toString();
 
                                 if(tipo == "1"){
-                                    startActivity(new Intent(Login.this, ProfileActivity.class));
+                                    startActivity(new Intent(Login.this, PerfilCliente.class));
                                     finish();
                                 }if(tipo == "2"){
                                     startActivity(new Intent(Login.this, PerfilRepartidor.class));
