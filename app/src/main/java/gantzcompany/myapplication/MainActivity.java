@@ -98,7 +98,43 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+
         super.onStart();
+        if(nAuth.getCurrentUser() != null){
+            mDataBase = FirebaseDatabase.getInstance().getReference();
+            String id = nAuth.getCurrentUser().getUid();
+            mDataBase.child("Users").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String Tipo = dataSnapshot.child("tipo").getValue().toString();
+                    switch (Tipo)
+                    {
+                        case "1":
+                            startActivity(new Intent(MainActivity.this, PerfilCliente.class));
+
+                            break;
+                        case "2":
+                            startActivity(new Intent(MainActivity.this, PerfilRepartidor.class));
+
+                            break;
+                        case"3":
+                            startActivity(new Intent(MainActivity.this, PerfilAdmin.class));
+
+                            break;
+                    }
+
+
+                    Toast.makeText(MainActivity.this, Tipo, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            //startActivity(new Intent(MainActivity.this, PerfilCliente.class));
+            //finish();
+        }
 
     }
 }

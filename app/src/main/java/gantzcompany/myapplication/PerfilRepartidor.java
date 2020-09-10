@@ -88,12 +88,14 @@ public class PerfilRepartidor extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     for(DataSnapshot ds:dataSnapshot.getChildren()){
-                        String nombre = ds.child("nombre").getValue().toString();
-                        String cantidad = ds.child("cantidad").getValue().toString();
-                        String precio = ds.child("precio").getValue().toString();
-                        String descripcion = ds.child("descripcion").getValue().toString();
-                        nPedidosList.add(new Pedidos(nombre,cantidad,precio,descripcion));
 
+                        if(Boolean.parseBoolean(ds.child("enviando").getValue().toString())  != true){
+                            String nombre = ds.child("nombre").getValue().toString();
+                            String cantidad = ds.child("cantidad").getValue().toString();
+                            String precio = ds.child("precio").getValue().toString();
+                            String descripcion = ds.child("descripcion").getValue().toString();
+                            nPedidosList.add(new Pedidos(nombre,cantidad,precio,descripcion));
+                        }
                     }
 
                     nAdapter = new PedidoAdapter(nPedidosList, R.layout.pedidos_view);
