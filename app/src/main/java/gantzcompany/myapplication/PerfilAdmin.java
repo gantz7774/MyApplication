@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import gantzcompany.myapplication.adapters.UsuarioAdapter;
 import gantzcompany.myapplication.models.Usuarios;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,4 +93,37 @@ public class PerfilAdmin extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_admin, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuitem){
+
+        int id = menuitem.getItemId();
+        switch (id){
+
+            case R.id.btnInformacion:
+                startActivity(new Intent(this, InformacionActivity.class));
+                finish();
+                break;
+            case R.id.btnPedidosPorAsignar:
+                startActivity(new Intent(this, PedidosPorAsignar.class));
+                finish();
+                break;
+            case R.id.btnCerrarSesion:
+                mAuth.signOut();
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(menuitem);
+    }
+
 }

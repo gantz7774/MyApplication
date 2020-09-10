@@ -1,34 +1,67 @@
 package gantzcompany.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class InformacionActivity extends AppCompatActivity {
 
-    private EditText mEditTextMensaje;
-    private Button mBtnCrearDatos;
     private DatabaseReference mDataBase;
+    private FirebaseAuth mAuth;
+    private TextView mtextviewNombre;
+    private TextView mtextviewCorreo;
+    private TextView mtextviewTelefono;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion);
 
-        mEditTextMensaje = (EditText) findViewById(R.id.editTextMensaje);
-        mBtnCrearDatos = (Button) findViewById(R.id.btn_creardatos);
+        mAuth = FirebaseAuth.getInstance();
         mDataBase = FirebaseDatabase.getInstance().getReference();
 
-        mBtnCrearDatos.setOnClickListener(new View.OnClickListener() {
+        mtextviewNombre = (TextView) findViewById(R.id.textviewNombreInfo);
+        mtextviewCorreo = (TextView) findViewById(R.id.textviewCorreoInfo);
+        mtextviewTelefono = (TextView) findViewById(R.id.textviewTelefonoInfo);
+
+        obtenerDatoUsuario();
+    }
+
+    private void obtenerDatoUsuario(){
+        String id = mAuth.getCurrentUser().getUid();
+        mDataBase.child("Users").child(id).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                String mensaje = mEditTextMensaje.getText().toString();
-                mDataBase.child("texto").setValue(mensaje);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()){
+                    String nombre = dataSnapshot.child("nombre").getValue().toString();
+                    String correo = dataSnapshot.child("correo").getValue().toString();
+                    String telefono = dataSnapshot.child("telefono").getValue().toString();
+
+
+                    mtextviewNombre.setText(nombre);
+                    mtextviewCorreo.setText(correo);
+                    mtextviewTelefono.setText(telefono);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
