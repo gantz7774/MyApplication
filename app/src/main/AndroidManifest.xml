@@ -23,7 +23,7 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".PerfilRepartidor" />
         <activity android:name=".PerfilAdmin" />
-        <activity android:name=".PruebaActivity" />
+        <activity android:name=".InformacionActivity" />
         <activity android:name=".MainActivity"
             android:noHistory="false">
             <intent-filter>

@@ -36,8 +36,10 @@ public class PerfilCliente extends AppCompatActivity {
     private String nombre = "";
     private String precio = "";
     private String descripcion ="";
+    private String direccion ="";
     private EditText etcantidad;
     private EditText etprecio;
+    private EditText etdireccion;
     private Spinner spdescripcion;
 
     private FirebaseAuth mAuth;
@@ -53,6 +55,7 @@ public class PerfilCliente extends AppCompatActivity {
         mbtnGenerarPedido = (Button) findViewById(R.id.btn_generar_pedido);
         etcantidad = (EditText) findViewById(R.id.editTextCantidad);
         etprecio = (EditText) findViewById(R.id.editTextPrecio);
+        etdireccion = (EditText) findViewById(R.id.editTextDireccion);
         spdescripcion = (Spinner) findViewById(R.id.spinnerDescripcion);
 
         mtextviewNombre = (TextView) findViewById(R.id.tvNombre);
@@ -64,10 +67,11 @@ public class PerfilCliente extends AppCompatActivity {
             public void onClick(View view) {
                 cantidad = etcantidad.getText().toString();
                 precio = etprecio.getText().toString();
+                direccion = etdireccion.getText().toString();
                 nombre = mtextviewNombre.getText().toString();
                 descripcion = spdescripcion.getSelectedItem().toString();
 
-                if(!cantidad.isEmpty()) {
+                if(!cantidad.isEmpty() && !direccion.isEmpty() ) {
 
                     registrarPedido();
 
@@ -75,7 +79,6 @@ public class PerfilCliente extends AppCompatActivity {
                     Toast.makeText(PerfilCliente.this,"Debe completar todos los campos", Toast.LENGTH_SHORT).show();
                 }
 
-                /*startActivity(new Intent(ProfileActivity.this, MapsActivity.class));*/
 
             }
         });
@@ -91,6 +94,7 @@ public class PerfilCliente extends AppCompatActivity {
                     map.put( "cantidad", cantidad+" unidades");
                     map.put( "precio", precio+" soles");
                     map.put( "descripcion", descripcion);
+                    map.put( "direccion", direccion);
                     map.put( "entregado", false);
                     map.put( "enviando", false);
                     map.put( "id", id);
@@ -151,11 +155,17 @@ public class PerfilCliente extends AppCompatActivity {
 
         int id = menuitem.getItemId();
         switch (id){
+            case R.id.btnInformacion:
+                startActivity(new Intent(PerfilCliente.this, InformacionActivity.class));
+                finish();
+                break;
+
             case R.id.btnCerrarSesion:
                     mAuth.signOut();
                     startActivity(new Intent(PerfilCliente.this, MainActivity.class));
                     finish();
                 break;
+
         }
 
         return super.onOptionsItemSelected(menuitem);

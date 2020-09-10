@@ -10,7 +10,7 @@ import android.widget.EditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class PruebaActivity extends AppCompatActivity {
+public class InformacionActivity extends AppCompatActivity {
 
     private EditText mEditTextMensaje;
     private Button mBtnCrearDatos;
@@ -18,7 +18,7 @@ public class PruebaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prueba);
+        setContentView(R.layout.activity_informacion);
 
         mEditTextMensaje = (EditText) findViewById(R.id.editTextMensaje);
         mBtnCrearDatos = (Button) findViewById(R.id.btn_creardatos);

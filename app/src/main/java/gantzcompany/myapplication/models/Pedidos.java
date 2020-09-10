@@ -5,6 +5,7 @@ public class Pedidos {
     private String Cantidad;
     private String Precio;
     private String Descripcion;
+    private String Direccion;
 
     public Boolean getEntregado() {
         return Entregado;
@@ -18,11 +19,12 @@ public class Pedidos {
 
     public Pedidos(){}
 
-    public Pedidos(String Nombre, String Cantidad, String Precio, String Descripcion ){
+    public Pedidos(String Nombre, String Cantidad, String Precio, String Descripcion, String Direccion ){
         this.Nombre = Nombre;
         this.Cantidad = Cantidad;
         this.Precio = Precio;
         this.Descripcion = Descripcion;
+        this.Direccion = Direccion;
     }
 
     public String getNombre() {
@@ -53,6 +55,14 @@ public class Pedidos {
 
     public void setDescripcion(String descripcion) {
         Descripcion = descripcion;
+    }
+
+    public String getDireccion() {
+        return Direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        Direccion = direccion;
     }
 
 

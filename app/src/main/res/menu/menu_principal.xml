@@ -7,6 +7,12 @@
     >
 
     <item
+        android:id="@+id/btnInformacion"
+        android:title="Informacion del Perfil"
+        app:showAsAction="never"
+        ></item>
+
+    <item
         android:id="@+id/btnCerrarSesion"
         android:title="Cerrar Sesion"
         app:showAsAction="never"

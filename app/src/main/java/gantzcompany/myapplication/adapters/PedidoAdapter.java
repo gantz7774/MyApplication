@@ -39,6 +39,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
         holder.textviewCantidad.setText(pedidos.getCantidad());
         holder.textviewPrecio.setText(pedidos.getPrecio());
         holder.textviewDescripcion.setText(pedidos.getDescripcion());
+        holder.textviewDireccion.setText(pedidos.getDireccion());
 
     }
     @Override
@@ -52,6 +53,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
         private TextView textviewCantidad;
         private TextView textviewPrecio;
         private TextView textviewDescripcion;
+        private TextView textviewDireccion;
         public View view;
 
         public ViewHolder(View view){
@@ -62,6 +64,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
             this.textviewCantidad = (TextView) view.findViewById(R.id.textviewCantidad);
             this.textviewPrecio = (TextView) view.findViewById(R.id.textviewPrecio);
             this.textviewDescripcion = (TextView) view.findViewById(R.id.textviewDescripcion);
+            this.textviewDireccion = (TextView) view.findViewById(R.id.textviewDireccion);
         }
     }
 }

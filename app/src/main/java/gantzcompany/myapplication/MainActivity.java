@@ -123,8 +123,6 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
 
-
-                    Toast.makeText(MainActivity.this, Tipo, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -132,8 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-            //startActivity(new Intent(MainActivity.this, PerfilCliente.class));
-            //finish();
+
         }
 
     }
