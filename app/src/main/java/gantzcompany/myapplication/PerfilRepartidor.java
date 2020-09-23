@@ -13,7 +13,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +39,7 @@ public class PerfilRepartidor extends AppCompatActivity {
     private TextView mtextviewPrecio;
     private TextView mtextviewDescripcion;
     private TextView mtextviewDireccion;
+
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +55,9 @@ public class PerfilRepartidor extends AppCompatActivity {
         mtextviewDescripcion = (TextView) findViewById(R.id.textviewDescripcion);
         mtextviewDireccion = (TextView) findViewById(R.id.textviewDireccion);
 
+
         nRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         obtenerDatoUsuario();
         getPedidosFromFirebase();
@@ -120,12 +126,17 @@ public class PerfilRepartidor extends AppCompatActivity {
                     for(DataSnapshot ds:dataSnapshot.getChildren()){
 
                         if(Boolean.parseBoolean(ds.child("enviando").getValue().toString())  != true){
+
+                            String latitud = ds.child("latitud").getValue().toString();
+                            String longitud = ds.child("longitud").getValue().toString();
+
+
                             String nombre = ds.child("nombre").getValue().toString();
                             String cantidad = ds.child("cantidad").getValue().toString();
                             String precio = ds.child("precio").getValue().toString();
                             String descripcion = ds.child("descripcion").getValue().toString();
                             String direccion = ds.child("direccion").getValue().toString();
-                            nPedidosList.add(new Pedidos(nombre,cantidad,precio,descripcion,direccion));
+                            nPedidosList.add(new Pedidos(nombre,cantidad,precio,descripcion,direccion,latitud,longitud));
                         }
                     }
 

@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -41,8 +42,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng cor = new LatLng(-3.7529168,-73.3533553);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cor,5));
+        Bundle extras = getIntent().getExtras();
+        lng = extras.getDouble("longitud",-73.3533553);
+        lat = extras.getDouble("latitud",-3.7529168);
+        LatLng cor = new LatLng(lat,lng);
+        Toast.makeText(this, lat+" "+lng, Toast.LENGTH_SHORT).show();
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cor,16));
+        agregarMarcador(lat, lng);
         miUbicacion();
     }
 

@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth nAuth;
     private DatabaseReference mDataBase;
 
-    private FusedLocationProviderClient mFusedLocationClient;
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS;
 
     @Override
@@ -44,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         nAuth = FirebaseAuth.getInstance();
         mDataBase = FirebaseDatabase.getInstance().getReference();
 
-       mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        subirLatLongFirebase();
+
+
 
         btn_ir_login = findViewById(R.id.btn_ir_login);
         btn_ir_registrarse = findViewById(R.id.btn_ir_registrarse);
@@ -65,35 +64,6 @@ public class MainActivity extends AppCompatActivity {
                 //finish();
             }
         });
-    }
-
-   private void subirLatLongFirebase() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mFusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            Log.e("Latitud: ", location.getLatitude()+" Longitud: "+location.getLongitude());
-                        }
-                    }
-                });
-
     }
 
     @Override

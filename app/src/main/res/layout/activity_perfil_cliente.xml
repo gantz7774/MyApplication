@@ -103,13 +103,13 @@
             android:layout_height="wrap_content"
             android:text="Precio" />
 
-        <EditText
+        <TextView
             android:id="@+id/editTextPrecio"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="97dp"
             android:ems="10"
-            android:inputType="number" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 

@@ -95,7 +95,9 @@ public class PedidosPorAsignar extends AppCompatActivity {
                             String precio = ds.child("precio").getValue().toString();
                             String descripcion = ds.child("descripcion").getValue().toString();
                             String direccion = ds.child("direccion").getValue().toString();
-                            nPedidosList.add(new Pedidos(nombre,cantidad,precio,descripcion,direccion));
+                            String latitud = ds.child("latitud").getValue().toString();
+                            String longitud = ds.child("longitud").getValue().toString();
+                            nPedidosList.add(new Pedidos(nombre,cantidad,precio,descripcion,direccion,latitud,longitud));
                         }
                     }
 

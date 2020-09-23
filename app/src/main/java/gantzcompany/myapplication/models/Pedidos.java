@@ -6,6 +6,8 @@ public class Pedidos {
     private String Precio;
     private String Descripcion;
     private String Direccion;
+    private String Latitud;
+    private String Longitud;
 
     public Boolean getEntregado() {
         return Entregado;
@@ -19,12 +21,14 @@ public class Pedidos {
 
     public Pedidos(){}
 
-    public Pedidos(String Nombre, String Cantidad, String Precio, String Descripcion, String Direccion ){
+    public Pedidos(String Nombre, String Cantidad, String Precio, String Descripcion, String Direccion, String Latitud, String Longitud ){
         this.Nombre = Nombre;
         this.Cantidad = Cantidad;
         this.Precio = Precio;
         this.Descripcion = Descripcion;
         this.Direccion = Direccion;
+        this.Latitud = Latitud;
+        this.Longitud = Longitud;
     }
 
     public String getNombre() {
@@ -65,5 +69,19 @@ public class Pedidos {
         Direccion = direccion;
     }
 
+    public String getLongitud() {
+        return Longitud;
+    }
 
+    public void setLongitud(String longitud) {
+        Longitud = longitud;
+    }
+
+    public String getLatitud() {
+        return Latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        Latitud = latitud;
+    }
 }
