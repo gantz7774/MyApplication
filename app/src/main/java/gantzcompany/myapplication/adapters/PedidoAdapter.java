@@ -8,12 +8,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import gantzcompany.myapplication.ConsultasFirebase;
 import gantzcompany.myapplication.MapsActivity;
-import gantzcompany.myapplication.PerfilCliente;
 import gantzcompany.myapplication.R;
 import gantzcompany.myapplication.models.Pedidos;
 
@@ -37,7 +40,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PedidoAdapter.ViewHolder holder, int index) {
+    public void onBindViewHolder(@NonNull final PedidoAdapter.ViewHolder holder, int index) {
 
         final Pedidos pedidos = pedidosList.get(index);
 
@@ -46,6 +49,25 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
         holder.textviewPrecio.setText(pedidos.getPrecio());
         holder.textviewDescripcion.setText(pedidos.getDescripcion());
         holder.textviewDireccion.setText(pedidos.getDireccion());
+        switch (pedidos.getTipoPedido()){
+            case ADMIN:
+                holder.btnasignarrepartidor.setText("Asignar repartidor");
+
+                break;
+            case REPARTIDOR:
+                holder.btnasignarrepartidor.setText("Aceptar Pedido");
+                holder.btnasignarrepartidor.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View view) {
+                        holder.btnasignarrepartidor.setText("Espere por favor...");
+                        holder.btnasignarrepartidor.setEnabled(false);
+                        ConsultasFirebase consultasFirebase = new ConsultasFirebase();
+                        consultasFirebase.asignarRepartidor(consultasFirebase.getAuthUser().getCurrentUser().getUid(), pedidos.getIdpedido());
+
+                    }
+                });
+                break;
+        }
         holder.btnverubicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,6 +83,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
     public int getItemCount() {
         return pedidosList.size();
     }
+
 
     public class  ViewHolder extends  RecyclerView.ViewHolder{
 
@@ -83,7 +106,7 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
             this.textviewDescripcion = (TextView) view.findViewById(R.id.textviewDescripcion);
             this.textviewDireccion = (TextView) view.findViewById(R.id.textviewDireccion);
             this.btnverubicacion = (Button) view.findViewById(R.id.btnVerUbicacion);
-            this.btnasignarrepartidor = (Button) view.findViewById(R.id.btnAsignarRepartidor);
+            this.btnasignarrepartidor = (Button) view.findViewById(R.id.btnAsignarPedido);
 
 
         }

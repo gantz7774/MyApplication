@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Agua Poseidon</string>
     <string name="title_activity_maps">Map</string>
+    <string name="informacion_activity">Informacion del Perfil</string>
     <string-array name="defaultValue">
         <item>Seleccionar</item>
         <item>Intercambio</item>

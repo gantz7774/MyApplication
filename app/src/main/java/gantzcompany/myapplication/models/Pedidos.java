@@ -1,6 +1,7 @@
 package gantzcompany.myapplication.models;
 
 public class Pedidos {
+    private String idpedido;
     private String Nombre;
     private String Cantidad;
     private String Precio;
@@ -8,6 +9,7 @@ public class Pedidos {
     private String Direccion;
     private String Latitud;
     private String Longitud;
+    private TipoPedido tipoPedido;
 
     public Boolean getEntregado() {
         return Entregado;
@@ -21,7 +23,8 @@ public class Pedidos {
 
     public Pedidos(){}
 
-    public Pedidos(String Nombre, String Cantidad, String Precio, String Descripcion, String Direccion, String Latitud, String Longitud ){
+    public Pedidos(String idPedido, String Nombre, String Cantidad, String Precio, String Descripcion, String Direccion, String Latitud, String Longitud, TipoPedido tipopedido){
+        this.setIdpedido(idPedido);
         this.Nombre = Nombre;
         this.Cantidad = Cantidad;
         this.Precio = Precio;
@@ -29,6 +32,7 @@ public class Pedidos {
         this.Direccion = Direccion;
         this.Latitud = Latitud;
         this.Longitud = Longitud;
+        this.tipoPedido = tipopedido;
     }
 
     public String getNombre() {
@@ -83,5 +87,21 @@ public class Pedidos {
 
     public void setLatitud(String latitud) {
         Latitud = latitud;
+    }
+
+    public TipoPedido getTipoPedido() {
+        return tipoPedido;
+    }
+
+    public void setTipoPedido(TipoPedido tipoPedido) {
+        this.tipoPedido = tipoPedido;
+    }
+
+    public String getIdpedido() {
+        return idpedido;
+    }
+
+    public void setIdpedido(String idpedido) {
+        this.idpedido = idpedido;
     }
 }

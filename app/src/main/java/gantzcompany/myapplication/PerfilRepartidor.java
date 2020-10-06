@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import gantzcompany.myapplication.adapters.PedidoAdapter;
 
 import gantzcompany.myapplication.models.Pedidos;
+import gantzcompany.myapplication.models.TipoPedido;
 
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,7 +62,12 @@ public class PerfilRepartidor extends AppCompatActivity {
 
 
         obtenerDatoUsuario();
-        getPedidosFromFirebase();
+
+        ConsultasFirebase consultaFirebase = new ConsultasFirebase();
+        consultaFirebase.getPedidosForRepartidor(mDatabase, nRecyclerView);
+
+
+        //getPedidosFromFirebase();
         obtenerDatoPedido();
     }
 
@@ -118,39 +125,6 @@ public class PerfilRepartidor extends AppCompatActivity {
         });
     }
 
-    private void getPedidosFromFirebase(){
-        mDatabase.child("Pedidos").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot ds:dataSnapshot.getChildren()){
-
-                        if(Boolean.parseBoolean(ds.child("enviando").getValue().toString())  != true){
-
-                            String latitud = ds.child("latitud").getValue().toString();
-                            String longitud = ds.child("longitud").getValue().toString();
-
-
-                            String nombre = ds.child("nombre").getValue().toString();
-                            String cantidad = ds.child("cantidad").getValue().toString();
-                            String precio = ds.child("precio").getValue().toString();
-                            String descripcion = ds.child("descripcion").getValue().toString();
-                            String direccion = ds.child("direccion").getValue().toString();
-                            nPedidosList.add(new Pedidos(nombre,cantidad,precio,descripcion,direccion,latitud,longitud));
-                        }
-                    }
-
-                    nAdapter = new PedidoAdapter(nPedidosList, R.layout.pedidos_view);
-                    nRecyclerView.setAdapter(nAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

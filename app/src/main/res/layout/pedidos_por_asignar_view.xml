@@ -121,13 +121,13 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btnAsignarRepartidor"
+            android:id="@+id/btnAsignarPedido"
             android:layout_width="81dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
-            android:background="#7EBD44"
-            android:text="Asignar Repartidor"
+            android:background="#FFEB3B"
+            android:text=""
             android:textSize="12dp" />
 
         <Button
